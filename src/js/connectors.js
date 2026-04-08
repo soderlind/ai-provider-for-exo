@@ -17,21 +17,32 @@ const { Button, TextControl } = window.wp.components;
 
 const el = createElement;
 
-const API_KEY_OPTION    = 'connectors_ai_exo_api_key';
-const ENDPOINT_OPTION   = 'connectors_ai_exo_endpoint';
-const MODEL_NAME_OPTION = 'connectors_ai_exo_model_name';
+const API_KEY_OPTION      = 'connectors_ai_exo_api_key';
+const ENDPOINT_OPTION     = 'connectors_ai_exo_endpoint';
+const MODEL_NAME_OPTION   = 'connectors_ai_exo_model_name';
+const CAPABILITIES_OPTION = 'connectors_ai_exo_capabilities';
 
 const ALL_OPTIONS = [
 	API_KEY_OPTION,
 	ENDPOINT_OPTION,
 	MODEL_NAME_OPTION,
+	CAPABILITIES_OPTION,
 ].join( ',' );
 
+const CAPABILITY_LABELS = {
+	text: __( 'Text', 'ai-provider-for-exo' ),
+	code: __( 'Code', 'ai-provider-for-exo' ),
+	thinking: __( 'Thinking', 'ai-provider-for-exo' ),
+	thinking_toggle: __( 'Thinking Toggle', 'ai-provider-for-exo' ),
+	vision: __( 'Vision', 'ai-provider-for-exo' ),
+};
+
 function useExoSettings() {
-	const [ isLoading, setIsLoading ]     = useState( true );
-	const [ apiKey, setApiKey ]           = useState( '' );
-	const [ endpoint, setEndpoint ]       = useState( '' );
-	const [ modelName, setModelName ]     = useState( '' );
+	const [ isLoading, setIsLoading ]           = useState( true );
+	const [ apiKey, setApiKey ]                 = useState( '' );
+	const [ endpoint, setEndpoint ]             = useState( '' );
+	const [ modelName, setModelName ]           = useState( '' );
+	const [ capabilities, setCapabilities ]     = useState( [] );
 
 	const isConnected = ! isLoading && endpoint !== '';
 
@@ -43,6 +54,7 @@ function useExoSettings() {
 			setApiKey( data[ API_KEY_OPTION ] || '' );
 			setEndpoint( data[ ENDPOINT_OPTION ] || 'http://localhost:52415' );
 			setModelName( data[ MODEL_NAME_OPTION ] || '' );
+			setCapabilities( data[ CAPABILITIES_OPTION ]?.length ? data[ CAPABILITIES_OPTION ] : [] );
 		} catch {
 			// Silently fail — settings will show defaults.
 		} finally {
@@ -88,6 +100,13 @@ function useExoSettings() {
 
 		if ( result.model_name ) {
 			setModelName( result.model_name );
+		} else {
+			setModelName( '' );
+		}
+		if ( result.capabilities?.length ) {
+			setCapabilities( result.capabilities );
+		} else {
+			setCapabilities( [] );
 		}
 
 		return result;
@@ -102,6 +121,7 @@ function useExoSettings() {
 		setEndpoint,
 		modelName,
 		setModelName,
+		capabilities,
 		saveSettings,
 		removeApiKey,
 		detectModels,
@@ -118,6 +138,7 @@ function ExoConnector( { slug, name, description, logo } ) {
 		setEndpoint,
 		modelName,
 		setModelName,
+		capabilities,
 		saveSettings,
 		removeApiKey,
 		detectModels,
@@ -272,8 +293,8 @@ function ExoConnector( { slug, name, description, logo } ) {
 			}, statusMessage ),
 		),
 
-		// Detected Models panel (read-only).
-		detectedModels.length > 0 && el( 'div', {
+		// Active Models panel (read-only).
+		( detectedModels.length > 0 || capabilities.length > 0 ) && el( 'div', {
 			style: {
 				marginTop: 20,
 				padding: '16px 20px',
@@ -296,17 +317,45 @@ function ExoConnector( { slug, name, description, logo } ) {
 					disabled: isDetecting || ! endpoint,
 				}, __( 'Refresh', 'ai-provider-for-exo' ) ),
 			),
-			el( 'div', { style: { display: 'flex', flexWrap: 'wrap', gap: 6 } },
-				...detectedModels.map( ( model ) =>
-					el( 'code', {
-						key: model,
-						style: {
-							padding: '2px 8px',
-							borderRadius: '4px',
-							background: '#e8e8e8',
-							fontSize: '12px',
-						},
-					}, model )
+
+			// Models.
+			detectedModels.length > 0 && el( 'div', { style: { marginBottom: 10 } },
+				el( 'div', { style: { display: 'flex', flexWrap: 'wrap', gap: 6 } },
+					...detectedModels.map( ( model ) =>
+						el( 'code', {
+							key: model,
+							style: {
+								padding: '2px 8px',
+								borderRadius: '4px',
+								background: '#e8e8e8',
+								fontSize: '12px',
+							},
+						}, model )
+					),
+				),
+			),
+
+			// Capabilities.
+			capabilities.length > 0 && el( 'div', null,
+				el( 'span', { style: { fontSize: '12px', color: '#757575', display: 'block', marginBottom: 4 } },
+					__( 'Capabilities', 'ai-provider-for-exo' )
+				),
+				el( 'div', { style: { display: 'flex', flexWrap: 'wrap', gap: 6 } },
+					...capabilities.map( ( cap ) =>
+						el( 'span', {
+							key: cap,
+							style: {
+								display: 'inline-flex',
+								alignItems: 'center',
+								padding: '3px 10px',
+								borderRadius: '12px',
+								background: '#e1f0e8',
+								color: '#1e4620',
+								fontSize: '12px',
+								lineHeight: '18px',
+							},
+						}, CAPABILITY_LABELS[ cap ] || cap )
+					),
 				),
 			),
 		),

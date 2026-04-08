@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-08T22:37:54+00:00\n"
+"POT-Creation-Date: 2026-04-08T22:45:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ai-provider-for-exo\n"
@@ -44,7 +44,7 @@ msgid "exo Model"
 msgstr ""
 
 #: src/Provider/ExoProvider.php:44
-#: src/js/connectors.js:339
+#: src/js/connectors.js:388
 msgid "exo"
 msgstr ""
 
@@ -65,107 +65,136 @@ msgid "exo returned HTTP %d. Verify the endpoint URL."
 msgstr ""
 
 #: src/Rest/DetectModelsController.php:122
-#: src/Rest/DetectModelsController.php:138
+#: src/Rest/DetectModelsController.php:145
 msgid "Connected to exo but no models were found."
 msgstr ""
 
-#: src/Settings/ConnectorSettings.php:20
+#: src/Settings/ConnectorSettings.php:21
 msgid "exo API Key"
 msgstr ""
 
-#: src/Settings/ConnectorSettings.php:21
+#: src/Settings/ConnectorSettings.php:22
 msgid "Optional API key for your exo cluster."
 msgstr ""
 
-#: src/Settings/ConnectorSettings.php:37
-#: src/js/connectors.js:217
+#: src/Settings/ConnectorSettings.php:38
+#: src/js/connectors.js:238
 msgid "Endpoint URL"
 msgstr ""
 
-#: src/Settings/ConnectorSettings.php:38
+#: src/Settings/ConnectorSettings.php:39
 msgid "exo API endpoint (default: http://localhost:52415)."
 msgstr ""
 
-#: src/Settings/ConnectorSettings.php:50
+#: src/Settings/ConnectorSettings.php:51
 msgid "Model Name"
 msgstr ""
 
-#: src/Settings/ConnectorSettings.php:51
+#: src/Settings/ConnectorSettings.php:52
 msgid "Model to use (leave empty to auto-detect from exo)."
 msgstr ""
 
-#: src/js/connectors.js:153
+#: src/Settings/ConnectorSettings.php:64
+#: src/js/connectors.js:341
+msgid "Capabilities"
+msgstr ""
+
+#: src/Settings/ConnectorSettings.php:65
+msgid "Auto-detected capabilities from active exo models."
+msgstr ""
+
+#: src/js/connectors.js:33
+msgid "Text"
+msgstr ""
+
+#: src/js/connectors.js:34
+msgid "Code"
+msgstr ""
+
+#: src/js/connectors.js:35
+msgid "Thinking"
+msgstr ""
+
+#: src/js/connectors.js:36
+msgid "Thinking Toggle"
+msgstr ""
+
+#: src/js/connectors.js:37
+msgid "Vision"
+msgstr ""
+
+#: src/js/connectors.js:174
 msgid "Connected but no active models. Start a model in exo first."
 msgstr ""
 
-#: src/js/connectors.js:154
+#: src/js/connectors.js:175
 msgid "Connected but no models detected."
 msgstr ""
 
-#: src/js/connectors.js:159
+#: src/js/connectors.js:180
 msgid "Detection failed. Check endpoint and API key."
 msgstr ""
 
-#: src/js/connectors.js:178
+#: src/js/connectors.js:199
 msgid "No active models. Start a model in exo first."
 msgstr ""
 
-#: src/js/connectors.js:179
+#: src/js/connectors.js:200
 msgid "No models detected."
 msgstr ""
 
-#: src/js/connectors.js:184
+#: src/js/connectors.js:205
 msgid "Detection failed."
 msgstr ""
 
-#: src/js/connectors.js:202
+#: src/js/connectors.js:223
 msgid "Edit"
 msgstr ""
 
-#: src/js/connectors.js:203
+#: src/js/connectors.js:224
 msgid "Set Up"
 msgstr ""
 
-#: src/js/connectors.js:224
+#: src/js/connectors.js:245
 msgid "Your exo API endpoint. Default: http://localhost:52415"
 msgstr ""
 
-#: src/js/connectors.js:229
+#: src/js/connectors.js:250
 msgid "API Key (optional)"
 msgstr ""
 
-#: src/js/connectors.js:235
+#: src/js/connectors.js:256
 msgid "Leave empty if not required"
 msgstr ""
 
-#: src/js/connectors.js:237
+#: src/js/connectors.js:258
 msgid "Your API key is stored securely."
 msgstr ""
 
-#: src/js/connectors.js:238
+#: src/js/connectors.js:259
 msgid "Only needed if your exo cluster requires authentication."
 msgstr ""
 
-#: src/js/connectors.js:251
+#: src/js/connectors.js:272
 msgid "Remove and replace"
 msgstr ""
 
-#: src/js/connectors.js:264
+#: src/js/connectors.js:285
 msgid "Save & Re-detect"
 msgstr ""
 
-#: src/js/connectors.js:265
+#: src/js/connectors.js:286
 msgid "Connect & Detect"
 msgstr ""
 
-#: src/js/connectors.js:289
+#: src/js/connectors.js:310
 msgid "Active Models"
 msgstr ""
 
-#: src/js/connectors.js:297
+#: src/js/connectors.js:318
 msgid "Refresh"
 msgstr ""
 
-#: src/js/connectors.js:340
+#: src/js/connectors.js:389
 msgid "Connect to exo — run frontier AI models locally on your device cluster."
 msgstr ""

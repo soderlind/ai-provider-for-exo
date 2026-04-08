@@ -166,6 +166,35 @@ msgstr "Aktive modeller"
 msgid "Refresh"
 msgstr "Oppdater"
 
+#: src/Settings/ConnectorSettings.php:64
+#: src/js/connectors.js:341
+msgid "Capabilities"
+msgstr "Funksjoner"
+
+#: src/Settings/ConnectorSettings.php:65
+msgid "Auto-detected capabilities from active exo models."
+msgstr "Automatisk oppdagede funksjoner fra aktive exo-modeller."
+
+#: src/js/connectors.js:33
+msgid "Text"
+msgstr "Tekst"
+
+#: src/js/connectors.js:34
+msgid "Code"
+msgstr "Kode"
+
+#: src/js/connectors.js:35
+msgid "Thinking"
+msgstr "Tenkning"
+
+#: src/js/connectors.js:36
+msgid "Thinking Toggle"
+msgstr "Tenkning av/på"
+
+#: src/js/connectors.js:37
+msgid "Vision"
+msgstr "Syn"
+
 #: src/js/connectors.js:263
 msgid "Connect to exo — run frontier AI models locally on your device cluster."
 msgstr "Koble til exo — kjør frontier AI-modeller lokalt på enhetene dine."

@@ -124,11 +124,18 @@ class DetectModelsController {
 			);
 		}
 
-		$catalog_ids = [];
+		$catalog_ids   = [];
+		$catalog_caps  = [];
 		foreach ( $body['data'] as $model_data ) {
 			$id = sanitize_text_field( $model_data['id'] ?? '' );
 			if ( ! empty( $id ) ) {
 				$catalog_ids[] = $id;
+				// Store capabilities from the catalog keyed by model id.
+				$caps = [];
+				if ( ! empty( $model_data['capabilities'] ) && is_array( $model_data['capabilities'] ) ) {
+					$caps = array_map( 'sanitize_text_field', $model_data['capabilities'] );
+				}
+				$catalog_caps[ $id ] = $caps;
 			}
 		}
 
@@ -168,8 +175,9 @@ class DetectModelsController {
 		}
 
 		if ( empty( $active_models ) ) {
-			// Clear any previously saved model name.
+			// Clear any previously saved model name and capabilities.
 			update_option( ConnectorSettings::OPTION_MODEL_NAME, '' );
+			update_option( ConnectorSettings::OPTION_CAPABILITIES, [] );
 
 			return new WP_REST_Response(
 				[
@@ -177,14 +185,25 @@ class DetectModelsController {
 					'models'        => [],
 					'count'         => 0,
 					'catalog_count' => count( $catalog_ids ),
+					'capabilities'  => [],
 				],
 				200
 			);
 		}
 
-		// Save the active model names (comma-separated) to the database.
+		// Collect unique capabilities from active models.
+		$all_caps = [];
+		foreach ( $active_models as $model_id ) {
+			foreach ( $catalog_caps[ $model_id ] ?? [] as $cap ) {
+				$all_caps[ $cap ] = true;
+			}
+		}
+		$capabilities = array_keys( $all_caps );
+
+		// Save the active model names and capabilities to the database.
 		$model_name = implode( ',', $active_models );
 		update_option( ConnectorSettings::OPTION_MODEL_NAME, $model_name );
+		update_option( ConnectorSettings::OPTION_CAPABILITIES, $capabilities );
 
 		return new WP_REST_Response(
 			[
@@ -192,6 +211,7 @@ class DetectModelsController {
 				'models'        => $active_models,
 				'count'         => count( $active_models ),
 				'catalog_count' => count( $catalog_ids ),
+				'capabilities'  => $capabilities,
 			],
 			200
 		);

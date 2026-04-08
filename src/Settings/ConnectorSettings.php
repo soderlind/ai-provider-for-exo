@@ -7,9 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ConnectorSettings {
 
-	public const OPTION_API_KEY    = 'connectors_ai_exo_api_key';
-	public const OPTION_ENDPOINT   = 'connectors_ai_exo_endpoint';
-	public const OPTION_MODEL_NAME = 'connectors_ai_exo_model_name';
+	public const OPTION_API_KEY      = 'connectors_ai_exo_api_key';
+	public const OPTION_ENDPOINT     = 'connectors_ai_exo_endpoint';
+	public const OPTION_MODEL_NAME   = 'connectors_ai_exo_model_name';
+	public const OPTION_CAPABILITIES = 'connectors_ai_exo_capabilities';
 
 	public static function register(): void {
 		register_setting(
@@ -52,6 +53,23 @@ class ConnectorSettings {
 				'default'           => '',
 				'show_in_rest'      => true,
 				'sanitize_callback' => 'sanitize_text_field',
+			]
+		);
+
+		register_setting(
+			'connectors',
+			self::OPTION_CAPABILITIES,
+			[
+				'type'         => 'array',
+				'label'        => __( 'Capabilities', 'ai-provider-for-exo' ),
+				'description'  => __( 'Auto-detected capabilities from active exo models.', 'ai-provider-for-exo' ),
+				'default'      => [],
+				'show_in_rest' => [
+					'schema' => [
+						'type'  => 'array',
+						'items' => [ 'type' => 'string' ],
+					],
+				],
 			]
 		);
 	}

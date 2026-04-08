@@ -11,8 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Register exo as a WordPress AI provider via the AI Client SDK.
 - OpenAI-compatible text generation through exo's chat completions API.
 - Auto-detect active models from the exo cluster (REST endpoint: `POST /exo/v1/detect`).
+- Capability detection — captures and displays model capabilities (Text, Code, Thinking, Vision) as badges.
 - Connector settings UI with "Connect & Detect" / "Save & Re-detect" flow.
 - Detected active models displayed in a read-only panel with Refresh support.
+- Custom exo logo icon (40×40 square) for the Connectors page.
 - Optional API key authentication with secure storage and masking.
 - Configurable endpoint URL (default: `http://localhost:52415`).
 - Environment variable and `wp-config.php` constant support (`EXO_ENDPOINT`, `EXO_API_KEY`, `EXO_MODEL`).

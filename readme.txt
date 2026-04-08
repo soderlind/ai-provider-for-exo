@@ -20,8 +20,10 @@ This plugin registers **exo** as an AI provider in WordPress 7's AI Client SDK a
 
 * Registers exo as a WordPress AI provider
 * OpenAI-compatible text generation via exo's chat completions API
-* Auto-discovers available models from your exo cluster
-* Optional API key authentication
+* Auto-detect active models from your running exo cluster
+* Capability detection — displays model capabilities (Text, Code, Thinking, Vision) as badges
+* "Connect & Detect" / "Save & Re-detect" connector flow
+* Optional API key authentication with secure storage
 * Configurable endpoint URL (default: `http://localhost:52415`)
 * Settings integrated into WordPress 7's Connectors page
 
@@ -55,8 +57,10 @@ You can also define these as constants in `wp-config.php`.
 * Register exo as a WordPress AI provider via the AI Client SDK.
 * OpenAI-compatible text generation through exo's chat completions API.
 * Auto-detect active models from the exo cluster (REST endpoint: POST /exo/v1/detect).
+* Capability detection — captures and displays model capabilities (Text, Code, Thinking, Vision) as badges.
 * Connector settings UI with "Connect & Detect" / "Save & Re-detect" flow.
 * Detected active models displayed in a read-only panel with Refresh support.
+* Custom exo logo icon for the Connectors page.
 * Optional API key authentication with secure storage and masking.
 * Configurable endpoint URL (default: http://localhost:52415).
 * Environment variable and wp-config.php constant support (EXO_ENDPOINT, EXO_API_KEY, EXO_MODEL).

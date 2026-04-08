@@ -84,7 +84,7 @@ class DetectModelsController {
 		$headers = [ 'Content-Type' => 'application/json' ];
 
 		if ( ! empty( $api_key ) ) {
-			$headers['Authorization'] = 'Bearer ' . $api_key;
+			$headers[ 'Authorization' ] = 'Bearer ' . $api_key;
 		}
 
 		// 1. Fetch the model catalog.
@@ -116,7 +116,7 @@ class DetectModelsController {
 
 		$body = json_decode( wp_remote_retrieve_body( $response ), true );
 
-		if ( ! is_array( $body ) || empty( $body['data'] ) ) {
+		if ( ! is_array( $body ) || empty( $body[ 'data' ] ) ) {
 			return new WP_Error(
 				'no_models',
 				__( 'Connected to exo but no models were found.', 'ai-provider-for-exo' ),
@@ -124,16 +124,16 @@ class DetectModelsController {
 			);
 		}
 
-		$catalog_ids   = [];
-		$catalog_caps  = [];
-		foreach ( $body['data'] as $model_data ) {
-			$id = sanitize_text_field( $model_data['id'] ?? '' );
+		$catalog_ids  = [];
+		$catalog_caps = [];
+		foreach ( $body[ 'data' ] as $model_data ) {
+			$id = sanitize_text_field( $model_data[ 'id' ] ?? '' );
 			if ( ! empty( $id ) ) {
 				$catalog_ids[] = $id;
 				// Store capabilities from the catalog keyed by model id.
 				$caps = [];
-				if ( ! empty( $model_data['capabilities'] ) && is_array( $model_data['capabilities'] ) ) {
-					$caps = array_map( 'sanitize_text_field', $model_data['capabilities'] );
+				if ( ! empty( $model_data[ 'capabilities' ] ) && is_array( $model_data[ 'capabilities' ] ) ) {
+					$caps = array_map( 'sanitize_text_field', $model_data[ 'capabilities' ] );
 				}
 				$catalog_caps[ $id ] = $caps;
 			}

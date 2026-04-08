@@ -46,14 +46,14 @@ add_action( 'init', __NAMESPACE__ . '\\load_textdomain' );
  * Register the provider with the AI Client registry early.
  */
 function register_provider(): void {
-	if ( ! class_exists( AiClient::class ) ) {
+	if ( ! class_exists( AiClient::class) ) {
 		return;
 	}
 
 	$registry = AiClient::defaultRegistry();
 
-	if ( ! $registry->hasProvider( ExoProvider::class ) ) {
-		$registry->registerProvider( ExoProvider::class );
+	if ( ! $registry->hasProvider( ExoProvider::class) ) {
+		$registry->registerProvider( ExoProvider::class);
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\\register_provider', 5 );
@@ -65,7 +65,7 @@ add_action( 'init', __NAMESPACE__ . '\\register_provider', 5 );
  * exo uses standard Bearer token authentication (optional).
  */
 function setup_authentication(): void {
-	if ( ! class_exists( AiClient::class ) ) {
+	if ( ! class_exists( AiClient::class) ) {
 		return;
 	}
 

@@ -27,6 +27,26 @@ exo connects all your devices into an AI cluster, enabling you to run frontier m
 - Settings integrated into WordPress 7's Connectors page
 - Full i18n support with Norwegian Bokmål (nb_NO) translation
 
+## Choosing a Model
+
+exo exposes every model in its catalog, but only models actively loaded on your cluster will respond. Use **Connect & Detect** on the Connectors page to discover which models are running.
+
+**Recommended: Instruct models** — These produce clean, usable output for WordPress AI features (title generation, content suggestions, etc.).
+
+| Model | Size | Notes |
+|-------|------|-------|
+| `Llama-3.2-3B-Instruct-8bit` | ~3 GB | Fast, great for short tasks |
+| `Meta-Llama-3.1-8B-Instruct-4bit` | ~4 GB | Good balance of speed and quality |
+| `Llama-3.3-70B-Instruct-4bit` | ~35 GB | Best quality, needs a larger cluster |
+
+**Avoid: Reasoning/thinking models** (Qwen3.5, DeepSeek, GLM, Nemotron-Nano) — These models spend most of their token budget on internal chain-of-thought, producing slow responses with minimal visible output. They may return their thinking process instead of a clean answer.
+
+To load a model on your cluster:
+
+```bash
+exo run mlx-community/Llama-3.2-3B-Instruct-8bit
+```
+
 ## Requirements
 
 - WordPress 7.0 or later

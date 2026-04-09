@@ -90,6 +90,21 @@ function setup_authentication(): void {
 add_action( 'init', __NAMESPACE__ . '\\setup_authentication', 30 );
 
 /**
+ * Increase the AI Client request timeout for local inference.
+ *
+ * The default 30 s is often insufficient for reasoning models running
+ * on a local exo cluster. Bump to 300 s (5 min) so text generation
+ * with multiple candidates has enough time to complete.
+ *
+ * @param int $timeout The default timeout in seconds.
+ * @return int
+ */
+function increase_request_timeout( int $timeout ): int {
+	return max( $timeout, 300 );
+}
+add_filter( 'wp_ai_client_default_request_timeout', __NAMESPACE__ . '\\increase_request_timeout' );
+
+/**
  * Allow the exo endpoint host through wp_safe_remote_request.
  *
  * The AI Client SDK uses wp_safe_remote_request which blocks requests to

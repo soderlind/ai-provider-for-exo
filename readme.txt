@@ -27,6 +27,20 @@ This plugin registers **exo** as an AI provider in WordPress 7's AI Client SDK a
 * Configurable endpoint URL (default: `http://localhost:52415`)
 * Settings integrated into WordPress 7's Connectors page
 
+**Choosing a Model:**
+
+exo exposes every model in its catalog, but only models actively loaded on your cluster will respond. Use "Connect & Detect" on the Connectors page to discover which models are running.
+
+Recommended — **Instruct models** produce clean, usable output for WordPress AI features (title generation, content suggestions, etc.):
+
+* `Llama-3.2-3B-Instruct-8bit` — ~3 GB, fast, great for short tasks
+* `Meta-Llama-3.1-8B-Instruct-4bit` — ~4 GB, good balance of speed and quality
+* `Llama-3.3-70B-Instruct-4bit` — ~35 GB, best quality, needs a larger cluster
+
+Avoid — **Reasoning/thinking models** (Qwen3.5, DeepSeek, GLM, Nemotron-Nano) spend most tokens on internal chain-of-thought, producing slow responses with minimal visible output.
+
+To load a model: `exo run mlx-community/Llama-3.2-3B-Instruct-8bit`
+
 **Requirements:**
 
 * WordPress 7.0 or later

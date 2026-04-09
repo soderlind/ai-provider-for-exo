@@ -1,6 +1,6 @@
 === AI Provider for exo ===
 Contributors: PerS
-Tags: ai, exo, local-ai, llm, connectors
+Tags: ai, exo, local-ai, llm, connector
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 8.3

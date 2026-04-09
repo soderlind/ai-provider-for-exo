@@ -26,7 +26,7 @@ use Exo\Settings\SettingsManager;
 
 class ExoProvider extends AbstractApiProvider {
 
-	protected static function baseUrl(): string {
+	public static function baseUrl(): string {
 		$endpoint = SettingsManager::instance()->get_endpoint();
 		return rtrim( $endpoint, '/' );
 	}

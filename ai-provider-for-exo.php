@@ -80,14 +80,92 @@ function setup_authentication(): void {
 		}
 	}
 
-	if ( ! empty( $api_key ) ) {
-		AiClient::defaultRegistry()->setProviderRequestAuthentication(
-			'exo',
-			new \WordPress\AiClient\Providers\Http\DTO\ApiKeyRequestAuthentication( $api_key )
-		);
-	}
+	// Always register authentication — the SDK requires an instance even
+	// when the provider does not need a key (exo API key is optional).
+	AiClient::defaultRegistry()->setProviderRequestAuthentication(
+		'exo',
+		new \WordPress\AiClient\Providers\Http\DTO\ApiKeyRequestAuthentication( $api_key ?: '' )
+	);
 }
 add_action( 'init', __NAMESPACE__ . '\\setup_authentication', 30 );
+
+/**
+ * Allow the exo endpoint host through wp_safe_remote_request.
+ *
+ * The AI Client SDK uses wp_safe_remote_request which blocks requests to
+ * private/loopback IPs (localhost, 127.0.0.1). Since exo typically runs
+ * locally, we whitelist the configured endpoint host.
+ *
+ * @param bool   $is_external Whether the host is external.
+ * @param string $host        The request host.
+ * @return bool
+ */
+function allow_exo_host( bool $is_external, string $host ): bool {
+	if ( $is_external ) {
+		return $is_external;
+	}
+
+	$endpoint = SettingsManager::instance()->get_endpoint();
+	$exo_host = wp_parse_url( $endpoint, PHP_URL_HOST );
+
+	if ( $exo_host && strtolower( $host ) === strtolower( $exo_host ) ) {
+		return true;
+	}
+
+	return $is_external;
+}
+add_filter( 'http_request_host_is_external', __NAMESPACE__ . '\\allow_exo_host', 10, 2 );
+
+/**
+ * Allow the exo endpoint port through wp_safe_remote_request.
+ *
+ * By default only ports 80, 443, and 8080 are allowed. exo's default
+ * port 52415 must be explicitly whitelisted.
+ *
+ * @param int[]  $ports Allowed ports.
+ * @param string $host  The request host.
+ * @return int[]
+ */
+function allow_exo_port( array $ports, string $host ): array {
+	$endpoint = SettingsManager::instance()->get_endpoint();
+	$exo_host = wp_parse_url( $endpoint, PHP_URL_HOST );
+	$exo_port = wp_parse_url( $endpoint, PHP_URL_PORT );
+
+	if ( $exo_host && $exo_port && strtolower( $host ) === strtolower( $exo_host ) ) {
+		$ports[] = (int) $exo_port;
+	}
+
+	return $ports;
+}
+add_filter( 'http_allowed_safe_ports', __NAMESPACE__ . '\\allow_exo_port', 10, 2 );
+
+/**
+ * Prepend exo models to the AI plugin's preferred text-generation list.
+ *
+ * Without this, the PromptBuilder falls back to the first "configured"
+ * provider it encounters (alphabetically), which may be a different
+ * provider with broken/missing auth. Adding exo models here ensures they
+ * are selected when the cluster is reachable.
+ *
+ * @param array<int, array{string, string}> $preferred The current preferred models.
+ * @return array<int, array{string, string}>
+ */
+function prepend_exo_preferred_models( array $preferred ): array {
+	try {
+		$dir    = ExoProvider::modelMetadataDirectory();
+		$models = $dir->listModelMetadata();
+	} catch ( \Exception $e ) {
+		return $preferred;
+	}
+
+	$exo = [];
+	foreach ( $models as $meta ) {
+		$exo[] = [ 'exo', $meta->getId() ];
+	}
+
+	return array_merge( $exo, $preferred );
+}
+add_filter( 'wpai_preferred_text_models', __NAMESPACE__ . '\\prepend_exo_preferred_models' );
 
 /**
  * Register connector settings.

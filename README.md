@@ -12,7 +12,8 @@ This plugin registers **exo** as an AI provider in WordPress 7's AI Client SDK a
 
 exo connects all your devices into an AI cluster, enabling you to run frontier models locally. It exposes an OpenAI-compatible API that this plugin connects to.
 
-<img width="100%"  alt="Screenshot 2026-04-09 at 00 56 51" src="https://github.com/user-attachments/assets/cd369677-14ec-420c-ad42-6938c00d55a9" />
+
+<img width="100%" alt="Screenshot 2026-04-09 at 20 03 15" src="https://github.com/user-attachments/assets/1a082284-c0a9-4195-bba4-c7a1179f86cf" />
 
 
 ### Features

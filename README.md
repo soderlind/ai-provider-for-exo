@@ -35,10 +35,11 @@ exo connects all your devices into an AI cluster, enabling you to run frontier m
 
 ## Installation
 
-1. Upload the `ai-provider-for-exo` folder to `/wp-content/plugins/`.
-2. Activate the plugin through the Plugins menu in WordPress.
-3. Go to **Settings → Connectors** and configure your exo endpoint.
-4. Click **Connect & Detect** to auto-discover active models and capabilities.
+1. Download [`ai-provider-for-exo.zip`](https://github.com/soderlind/ai-provider-for-exo/releases/latest/download/ai-provider-for-exo.zip)
+2. Upload via  `Plugins → Add New → Upload Plugin`
+3. Activate via `WordPress Admin → Plugins`
+4. Go to **Settings → Connectors** and configure your exo endpoint.
+5. Click **Connect & Detect** to auto-discover active models and capabilities.
 
 ## Configuration
 

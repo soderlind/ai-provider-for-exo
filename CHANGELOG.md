@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.3.0] - 2026-04-09
+
+### Fixed
+
+- Resolve "RequestAuthenticationInterface instance not set" error when AI plugin generates titles.
+- Emulate multi-candidate responses — exo ignores the OpenAI `n` parameter; now issues N sequential requests and merges candidates.
+- Implement `createRequest()` abstract method required by the SDK's `AbstractOpenAiCompatibleTextGenerationModel`.
+- Always register `ApiKeyRequestAuthentication` even with an empty key (SDK requires an auth instance).
+- Whitelist localhost and non-standard ports so `wp_safe_remote_request()` doesn't block exo.
+- Prepend exo models to `wpai_preferred_text_models` filter so PromptBuilder selects the correct provider.
+
+### Added
+
+- Default `max_tokens` (1024) to prevent unbounded reasoning in thinking models.
+- Request timeout increased to 300 s for local inference.
+- Model selection guidance in readme.txt and README.md.
+
 ## [0.2.0] - 2026-04-09
 
 ### Added

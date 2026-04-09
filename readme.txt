@@ -4,7 +4,7 @@ Tags: ai, exo, local-ai, llm, connector
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 0.2.0
+Stable tag: 0.3.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,17 @@ The plugin can be configured via the Connectors page or environment variables:
 You can also define these as constants in `wp-config.php`.
 
 == Changelog ==
+
+= 0.3.0 =
+* Fix: resolve "RequestAuthenticationInterface instance not set" error in AI plugin title generation.
+* Fix: emulate multi-candidate responses — exo ignores OpenAI `n` parameter, now issues N sequential requests.
+* Implement `createRequest()` abstract method required by SDK.
+* Always register authentication even with empty API key (SDK requires an instance).
+* Whitelist localhost and non-standard ports for `wp_safe_remote_request()`.
+* Prepend exo models to `wpai_preferred_text_models` filter for correct provider selection.
+* Increase request timeout to 300s for local inference.
+* Default `max_tokens` to 1024 to prevent unbounded reasoning in thinking models.
+* Add model selection guidance to documentation.
 
 = 0.2.0 =
 * Add sentinel connector for WordPress AI plugin compatibility.

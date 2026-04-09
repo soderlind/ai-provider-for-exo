@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: AI Provider for exo 0.1.0\n"
+"Project-Id-Version: AI Provider for exo 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ai-provider-for-exo\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-08T22:45:01+00:00\n"
+"POT-Creation-Date: 2026-04-09T14:18:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: ai-provider-for-exo\n"
@@ -39,12 +39,20 @@ msgstr ""
 msgid "https://soderlind.no/"
 msgstr ""
 
+#: ai-provider-for-exo.php:174
+msgid "exo Status"
+msgstr ""
+
+#: ai-provider-for-exo.php:175
+msgid "Internal compatibility connector for AI plugin detection."
+msgstr ""
+
 #: src/Metadata/ExoModelMetadataDirectory.php:49
 msgid "exo Model"
 msgstr ""
 
 #: src/Provider/ExoProvider.php:44
-#: src/js/connectors.js:388
+#: src/js/connectors.js:402
 msgid "exo"
 msgstr ""
 
@@ -195,6 +203,6 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/js/connectors.js:389
+#: src/js/connectors.js:403
 msgid "Connect to exo — run frontier AI models locally on your device cluster."
 msgstr ""

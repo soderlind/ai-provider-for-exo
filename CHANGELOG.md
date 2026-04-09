@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.2.0] - 2026-04-09
+
+### Added
+
+- Sentinel connector for WordPress AI plugin compatibility — the AI plugin now recognizes exo as a valid, configured provider.
+- Filter to hide the internal sentinel connector from the Connectors settings page.
+- Custom exo wordmark logo (40×40 square, sans-serif outline) for the Connectors page.
+
+### Fixed
+
+- AI plugin showed "requires a valid AI Connector" despite exo being configured.
+
 ## [0.1.0] - 2026-04-09
 
 ### Added
@@ -20,4 +32,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Environment variable and `wp-config.php` constant support (`EXO_ENDPOINT`, `EXO_API_KEY`, `EXO_MODEL`).
 - Full i18n support with Norwegian Bokmål (nb_NO) translation.
 
+[0.2.0]: https://github.com/soderlind/ai-provider-for-exo/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/soderlind/ai-provider-for-exo/releases/tag/0.1.0

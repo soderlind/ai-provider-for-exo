@@ -4,7 +4,7 @@ Tags: ai, exo, local-ai, llm, connectors
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,13 @@ The plugin can be configured via the Connectors page or environment variables:
 You can also define these as constants in `wp-config.php`.
 
 == Changelog ==
+
+= 0.2.0 =
+* Add sentinel connector for WordPress AI plugin compatibility.
+* AI plugin now recognizes exo as a valid, configured provider.
+* Filter to hide internal sentinel connector from Connectors settings page.
+* Custom exo wordmark logo (40×40 square) for the Connectors page.
+* Fix: AI plugin showed "requires a valid AI Connector" despite exo being configured.
 
 = 0.1.0 =
 * Initial release.

@@ -198,3 +198,11 @@ msgstr "Syn"
 #: src/js/connectors.js:263
 msgid "Connect to exo — run frontier AI models locally on your device cluster."
 msgstr "Koble til exo — kjør frontier AI-modeller lokalt på enhetene dine."
+
+#: ai-provider-for-exo.php
+msgid "exo Status"
+msgstr "exo-status"
+
+#: ai-provider-for-exo.php
+msgid "Internal compatibility connector for AI plugin detection."
+msgstr "Intern kompatibilitetsforbindelse for AI-pluginoppdagelse."

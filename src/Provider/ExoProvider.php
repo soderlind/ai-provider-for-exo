@@ -9,7 +9,7 @@
  *   Models: GET  /v1/models
  */
 
-namespace Exo\Provider;
+namespace Aiprfoex\Provider;
 
 use WordPress\AiClient\Providers\ApiBasedImplementation\AbstractApiProvider;
 use WordPress\AiClient\Providers\ApiBasedImplementation\ListModelsApiBasedProviderAvailability;
@@ -20,9 +20,9 @@ use WordPress\AiClient\Providers\Enums\ProviderTypeEnum;
 use WordPress\AiClient\Providers\Http\Enums\RequestAuthenticationMethod;
 use WordPress\AiClient\Providers\Models\Contracts\ModelInterface;
 use WordPress\AiClient\Providers\Models\DTO\ModelMetadata;
-use Exo\Metadata\ExoModelMetadataDirectory;
-use Exo\Models\ExoTextGenerationModel;
-use Exo\Settings\SettingsManager;
+use Aiprfoex\Metadata\ExoModelMetadataDirectory;
+use Aiprfoex\Models\ExoTextGenerationModel;
+use Aiprfoex\Settings\SettingsManager;
 
 class ExoProvider extends AbstractApiProvider {
 
@@ -40,7 +40,7 @@ class ExoProvider extends AbstractApiProvider {
 
 	protected static function createProviderMetadata(): ProviderMetadata {
 		return new ProviderMetadata(
-			'exo',
+			'aiprfoex',
 			__( 'exo', 'ai-provider-for-exo' ),
 			ProviderTypeEnum::server(),
 			'https://github.com/exo-explore/exo',

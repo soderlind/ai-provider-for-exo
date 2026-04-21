@@ -13,12 +13,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Exo\\": "src/"
+			"Aiprfoex\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Exo\\Tests\\": "tests/php/"
+			"Aiprfoex\\Tests\\": "tests/php/"
 		}
 	},
 	"scripts": {

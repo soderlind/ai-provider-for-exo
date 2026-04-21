@@ -9,7 +9,7 @@ describe( 'exo connector', () => {
 	it( 'registers the connector module', async () => {
 		await import( '../../src/js/connectors.js' );
 		expect( registerConnector ).toHaveBeenCalledWith(
-			'ai_provider/exo',
+			'ai_provider/aiprfoex',
 			expect.objectContaining( {
 				name: 'exo',
 				description: expect.any( String ),

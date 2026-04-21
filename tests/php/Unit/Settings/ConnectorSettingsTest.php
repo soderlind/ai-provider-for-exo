@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Exo\Tests\Unit\Settings;
+namespace Aiprfoex\Tests\Unit\Settings;
 
-use Exo\Settings\ConnectorSettings;
-use Exo\Tests\TestCase;
+use Aiprfoex\Settings\ConnectorSettings;
+use Aiprfoex\Tests\TestCase;
 
 class ConnectorSettingsTest extends TestCase {
 

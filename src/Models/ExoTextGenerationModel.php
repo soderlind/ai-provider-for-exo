@@ -13,7 +13,7 @@
  * results so the SDK's `toTexts()` returns one string per candidate.
  */
 
-namespace Exo\Models;
+namespace Aiprfoex\Models;
 
 use WordPress\AiClient\Providers\Http\DTO\Request;
 use WordPress\AiClient\Providers\Http\DTO\Response;
@@ -21,7 +21,7 @@ use WordPress\AiClient\Providers\Http\Enums\HttpMethodEnum;
 use WordPress\AiClient\Providers\OpenAiCompatibleImplementation\AbstractOpenAiCompatibleTextGenerationModel;
 use WordPress\AiClient\Results\DTO\GenerativeAiResult;
 use WordPress\AiClient\Messages\DTO\Message;
-use Exo\Provider\ExoProvider;
+use Aiprfoex\Provider\ExoProvider;
 
 class ExoTextGenerationModel extends AbstractOpenAiCompatibleTextGenerationModel {
 

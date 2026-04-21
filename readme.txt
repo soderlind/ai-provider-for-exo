@@ -4,7 +4,7 @@ Tags: ai, exo, local-ai, llm, connector
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 0.3.0
+Stable tag: 1.0.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,13 +58,21 @@ To load a model: `exo run mlx-community/Llama-3.2-3B-Instruct-8bit`
 
 The plugin can be configured via the Connectors page or environment variables:
 
-* `EXO_ENDPOINT` — exo API endpoint (default: `http://localhost:52415`)
-* `EXO_API_KEY` — Optional API key for authentication
-* `EXO_MODEL` — Model name to use (auto-detected if empty)
+* `AIPRFOEX_ENDPOINT` — exo API endpoint (default: `http://localhost:52415`)
+* `AIPRFOEX_API_KEY` — Optional API key for authentication
+* `AIPRFOEX_MODEL` — Model name to use (auto-detected if empty)
 
 You can also define these as constants in `wp-config.php`.
 
 == Changelog ==
+
+= 1.0.0 =
+* Prefix all declarations, globals, and stored data for WordPress.org compliance.
+* Namespace changed to `Aiprfoex`.
+* Constants, options, REST namespace, script handles, and provider slug all use the `aiprfoex` prefix.
+* Environment variable names changed: `AIPRFOEX_ENDPOINT`, `AIPRFOEX_API_KEY`, `AIPRFOEX_MODEL`.
+* Add `sanitize_callback` to `register_setting()` for capabilities option.
+* Remove `load_plugin_textdomain()` — WordPress.org handles translations automatically.
 
 = 0.3.0 =
 * Fix: resolve "RequestAuthenticationInterface instance not set" error in AI plugin title generation.

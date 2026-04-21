@@ -1,6 +1,6 @@
 <?php
 /**
- * Autoloader for the Exo namespace.
+ * Autoloader for the Aiprfoex namespace.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 spl_autoload_register( static function ( string $class ): void {
-	$prefix = 'Exo\\';
+	$prefix = 'Aiprfoex\\';
 
 	if ( ! str_starts_with( $class, $prefix ) ) {
 		return;

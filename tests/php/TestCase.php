@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Exo\Tests;
+namespace Aiprfoex\Tests;
 
 use Brain\Monkey;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;

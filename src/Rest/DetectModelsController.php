@@ -5,9 +5,9 @@
  * Probes the exo /v1/models endpoint and saves detected model names.
  */
 
-namespace Exo\Rest;
+namespace Aiprfoex\Rest;
 
-use Exo\Settings\ConnectorSettings;
+use Aiprfoex\Settings\ConnectorSettings;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DetectModelsController {
 
-	public const ROUTE_NAMESPACE = 'exo/v1';
+	public const ROUTE_NAMESPACE = 'aiprfoex/v1';
 	public const ROUTE           = '/detect';
 
 	/**

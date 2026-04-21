@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.0.0] - 2026-04-21
+
+### Changed
+
+- Prefix all declarations, globals, and stored data for WordPress.org compliance.
+  - Namespace `Exo` → `Aiprfoex`.
+  - Constants `EXO_*` → `AIPRFOEX_*`.
+  - Options `connectors_ai_exo_*` → `aiprfoex_*`.
+  - REST namespace `exo/v1` → `aiprfoex/v1`.
+  - Script module handle `exo/connectors` → `aiprfoex/connectors`.
+  - Provider slug `exo` → `aiprfoex`.
+  - Environment variable names `EXO_*` → `AIPRFOEX_*`.
+
+### Fixed
+
+- Add `sanitize_callback` to `register_setting()` for capabilities option.
+
+### Removed
+
+- `load_plugin_textdomain()` call — WordPress.org handles translations automatically since WP 4.6.
+
 ## [0.3.0] - 2026-04-09
 
 ### Fixed

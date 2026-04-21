@@ -5,7 +5,7 @@
  * Description: Connect WordPress to exo — run frontier AI models locally on your device cluster.
  * Requires at least: 7.0
  * Requires PHP: 8.3
- * Version: 0.3.0
+ * Version: 1.0.0
  * Author: Per Søderlind
  * Author URI: https://soderlind.no/
  * License: GPL-2.0-or-later
@@ -13,36 +13,24 @@
  * Domain Path: /languages
  */
 
-namespace Exo;
+namespace Aiprfoex;
 
 use WordPress\AiClient\AiClient;
-use Exo\Provider\ExoProvider;
-use Exo\Rest\DetectModelsController;
-use Exo\Settings\ConnectorSettings;
-use Exo\Settings\SettingsManager;
+use Aiprfoex\Provider\ExoProvider;
+use Aiprfoex\Rest\DetectModelsController;
+use Aiprfoex\Settings\ConnectorSettings;
+use Aiprfoex\Settings\SettingsManager;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
 
-define( 'EXO_PROVIDER_VERSION', '0.3.0' );
-define( 'EXO_PROVIDER_FILE', __FILE__ );
-define( 'EXO_AI_PLUGIN_SENTINEL_ID', 'exo_status' );
-define( 'EXO_AI_PLUGIN_SENTINEL_OPTION', 'connectors_ai_exo_status_api_key' );
+define( 'AIPRFOEX_PROVIDER_VERSION', '1.0.0' );
+define( 'AIPRFOEX_PROVIDER_FILE', __FILE__ );
+define( 'AIPRFOEX_AI_PLUGIN_SENTINEL_ID', 'aiprfoex_status' );
+define( 'AIPRFOEX_AI_PLUGIN_SENTINEL_OPTION', 'connectors_ai_aiprfoex_status_api_key' );
 
 require_once __DIR__ . '/src/autoload.php';
-
-/**
- * Load plugin text domain for translations.
- */
-function load_textdomain(): void {
-	load_plugin_textdomain(
-		'ai-provider-for-exo',
-		false,
-		dirname( plugin_basename( EXO_PROVIDER_FILE ) ) . '/languages'
-	);
-}
-add_action( 'init', __NAMESPACE__ . '\\load_textdomain' );
 
 /**
  * Register the provider with the AI Client registry early.
@@ -74,7 +62,7 @@ function setup_authentication(): void {
 	$api_key = ConnectorSettings::get_real_api_key();
 
 	if ( empty( $api_key ) ) {
-		$env_key = SettingsManager::instance()->resolve_env( 'EXO_API_KEY' );
+		$env_key = SettingsManager::instance()->resolve_env( 'AIPRFOEX_API_KEY' );
 		if ( '' !== $env_key ) {
 			$api_key = $env_key;
 		}
@@ -83,7 +71,7 @@ function setup_authentication(): void {
 	// Always register authentication — the SDK requires an instance even
 	// when the provider does not need a key (exo API key is optional).
 	AiClient::defaultRegistry()->setProviderRequestAuthentication(
-		'exo',
+		'aiprfoex',
 		new \WordPress\AiClient\Providers\Http\DTO\ApiKeyRequestAuthentication( $api_key ?: '' )
 	);
 }
@@ -175,7 +163,7 @@ function prepend_exo_preferred_models( array $preferred ): array {
 
 	$exo = [];
 	foreach ( $models as $meta ) {
-		$exo[] = [ 'exo', $meta->getId() ];
+		$exo[] = [ 'aiprfoex', $meta->getId() ];
 	}
 
 	return array_merge( $exo, $preferred );
@@ -200,21 +188,21 @@ add_action( 'rest_api_init', [ DetectModelsController::class, 'register' ] );
  */
 function register_connector_module(): void {
 	wp_register_script_module(
-		'exo/connectors',
-		plugins_url( 'build/connectors.js', EXO_PROVIDER_FILE ),
+		'aiprfoex/connectors',
+		plugins_url( 'build/connectors.js', AIPRFOEX_PROVIDER_FILE ),
 		[
 			[
 				'id'     => '@wordpress/connectors',
 				'import' => 'dynamic',
 			],
 		],
-		EXO_PROVIDER_VERSION
+		AIPRFOEX_PROVIDER_VERSION
 	);
 
 	wp_set_script_translations(
-		'exo/connectors',
+		'aiprfoex/connectors',
 		'ai-provider-for-exo',
-		plugin_dir_path( EXO_PROVIDER_FILE ) . 'languages'
+		plugin_dir_path( AIPRFOEX_PROVIDER_FILE ) . 'languages'
 	);
 }
 add_action( 'init', __NAMESPACE__ . '\\register_connector_module' );
@@ -223,7 +211,7 @@ add_action( 'init', __NAMESPACE__ . '\\register_connector_module' );
  * Enqueue on the Connectors page only (hook both page variants).
  */
 function enqueue_connector_module(): void {
-	wp_enqueue_script_module( 'exo/connectors' );
+	wp_enqueue_script_module( 'aiprfoex/connectors' );
 }
 add_action( 'options-connectors-wp-admin_init', __NAMESPACE__ . '\\enqueue_connector_module' );
 add_action( 'connectors-wp-admin_init', __NAMESPACE__ . '\\enqueue_connector_module' );
@@ -235,8 +223,8 @@ add_action( 'connectors-wp-admin_init', __NAMESPACE__ . '\\enqueue_connector_mod
  * @return array
  */
 function filter_connector_script_data( array $data ): array {
-	if ( isset( $data['connectors'][ EXO_AI_PLUGIN_SENTINEL_ID ] ) ) {
-		unset( $data['connectors'][ EXO_AI_PLUGIN_SENTINEL_ID ] );
+	if ( isset( $data['connectors'][ AIPRFOEX_AI_PLUGIN_SENTINEL_ID ] ) ) {
+		unset( $data['connectors'][ AIPRFOEX_AI_PLUGIN_SENTINEL_ID ] );
 	}
 
 	return $data;
@@ -256,13 +244,13 @@ add_filter( 'script_module_data_connectors-wp-admin', __NAMESPACE__ . '\\filter_
  * @param \WP_Connector_Registry $registry Connector registry instance.
  */
 function unregister_from_connector_registry( \WP_Connector_Registry $registry ): void {
-	if ( $registry->is_registered( 'exo' ) ) {
-		$registry->unregister( 'exo' );
+	if ( $registry->is_registered( 'aiprfoex' ) ) {
+		$registry->unregister( 'aiprfoex' );
 	}
 
-	if ( ! $registry->is_registered( EXO_AI_PLUGIN_SENTINEL_ID ) ) {
+	if ( ! $registry->is_registered( AIPRFOEX_AI_PLUGIN_SENTINEL_ID ) ) {
 		$registry->register(
-			EXO_AI_PLUGIN_SENTINEL_ID,
+			AIPRFOEX_AI_PLUGIN_SENTINEL_ID,
 			[
 				'name'           => __( 'exo Status', 'ai-provider-for-exo' ),
 				'description'    => __( 'Internal compatibility connector for AI plugin detection.', 'ai-provider-for-exo' ),
@@ -289,19 +277,19 @@ add_action( 'wp_connectors_init', __NAMESPACE__ . '\\unregister_from_connector_r
 function sync_ai_plugin_credential_sentinel(): void {
 	$endpoint = get_option( ConnectorSettings::OPTION_ENDPOINT );
 	if ( ! $endpoint ) {
-		$endpoint = SettingsManager::instance()->resolve_env( 'EXO_ENDPOINT' );
+		$endpoint = SettingsManager::instance()->resolve_env( 'AIPRFOEX_ENDPOINT' );
 	}
-	$current = get_option( EXO_AI_PLUGIN_SENTINEL_OPTION, '' );
+	$current = get_option( AIPRFOEX_AI_PLUGIN_SENTINEL_OPTION, '' );
 
 	if ( $endpoint ) {
 		if ( '1' !== $current ) {
-			update_option( EXO_AI_PLUGIN_SENTINEL_OPTION, '1' );
+			update_option( AIPRFOEX_AI_PLUGIN_SENTINEL_OPTION, '1' );
 		}
 		return;
 	}
 
 	if ( '' !== $current ) {
-		delete_option( EXO_AI_PLUGIN_SENTINEL_OPTION );
+		delete_option( AIPRFOEX_AI_PLUGIN_SENTINEL_OPTION );
 	}
 }
 add_action( 'init', __NAMESPACE__ . '\\sync_ai_plugin_credential_sentinel', 35 );

@@ -17,10 +17,10 @@ const { Button, TextControl } = window.wp.components;
 
 const el = createElement;
 
-const API_KEY_OPTION      = 'connectors_ai_exo_api_key';
-const ENDPOINT_OPTION     = 'connectors_ai_exo_endpoint';
-const MODEL_NAME_OPTION   = 'connectors_ai_exo_model_name';
-const CAPABILITIES_OPTION = 'connectors_ai_exo_capabilities';
+const API_KEY_OPTION      = 'aiprfoex_api_key';
+const ENDPOINT_OPTION     = 'aiprfoex_endpoint';
+const MODEL_NAME_OPTION   = 'aiprfoex_model_name';
+const CAPABILITIES_OPTION = 'aiprfoex_capabilities';
 
 const ALL_OPTIONS = [
 	API_KEY_OPTION,
@@ -90,7 +90,7 @@ function useExoSettings() {
 
 	const detectModels = useCallback( async ( detectEndpoint, detectApiKey ) => {
 		const result = await apiFetch( {
-			path: '/exo/v1/detect',
+			path: '/aiprfoex/v1/detect',
 			method: 'POST',
 			data: {
 				endpoint: detectEndpoint,
@@ -398,7 +398,7 @@ function ExoIcon() {
 	);
 }
 
-registerConnector( 'ai_provider/exo', {
+registerConnector( 'ai_provider/aiprfoex', {
 	name: __( 'exo', 'ai-provider-for-exo' ),
 	description: __( 'Connect to exo — run frontier AI models locally on your device cluster.', 'ai-provider-for-exo' ),
 	render: ExoConnector,

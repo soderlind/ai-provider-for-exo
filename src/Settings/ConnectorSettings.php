@@ -1,5 +1,5 @@
 <?php
-namespace Exo\Settings;
+namespace Aiprfoex\Settings;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -7,10 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class ConnectorSettings {
 
-	public const OPTION_API_KEY      = 'connectors_ai_exo_api_key';
-	public const OPTION_ENDPOINT     = 'connectors_ai_exo_endpoint';
-	public const OPTION_MODEL_NAME   = 'connectors_ai_exo_model_name';
-	public const OPTION_CAPABILITIES = 'connectors_ai_exo_capabilities';
+	public const OPTION_API_KEY      = 'aiprfoex_api_key';
+	public const OPTION_ENDPOINT     = 'aiprfoex_endpoint';
+	public const OPTION_MODEL_NAME   = 'aiprfoex_model_name';
+	public const OPTION_CAPABILITIES = 'aiprfoex_capabilities';
 
 	public static function register(): void {
 		register_setting(
@@ -60,18 +60,32 @@ class ConnectorSettings {
 			'connectors',
 			self::OPTION_CAPABILITIES,
 			[
-				'type'         => 'array',
-				'label'        => __( 'Capabilities', 'ai-provider-for-exo' ),
-				'description'  => __( 'Auto-detected capabilities from active exo models.', 'ai-provider-for-exo' ),
-				'default'      => [],
-				'show_in_rest' => [
+				'type'              => 'array',
+				'label'             => __( 'Capabilities', 'ai-provider-for-exo' ),
+				'description'       => __( 'Auto-detected capabilities from active exo models.', 'ai-provider-for-exo' ),
+				'default'           => [],
+				'show_in_rest'      => [
 					'schema' => [
 						'type'  => 'array',
 						'items' => [ 'type' => 'string' ],
 					],
 				],
+				'sanitize_callback' => [ __CLASS__, 'sanitize_capabilities' ],
 			]
 		);
+	}
+
+	/**
+	 * Sanitize the capabilities array.
+	 *
+	 * @param mixed $value Raw input.
+	 * @return string[]
+	 */
+	public static function sanitize_capabilities( mixed $value ): array {
+		if ( ! is_array( $value ) ) {
+			return [];
+		}
+		return array_map( 'sanitize_text_field', $value );
 	}
 
 	public static function mask_api_key( mixed $key ): string {

@@ -1,5 +1,5 @@
 <?php
-namespace Exo\Settings;
+namespace Aiprfoex\Settings;
 
 class SettingsManager {
 
@@ -14,7 +14,7 @@ class SettingsManager {
 	public function get_endpoint(): string {
 		return $this->resolve(
 			ConnectorSettings::OPTION_ENDPOINT,
-			'EXO_ENDPOINT',
+			'AIPRFOEX_ENDPOINT',
 			'http://localhost:52415'
 		);
 	}
@@ -24,13 +24,13 @@ class SettingsManager {
 		if ( ! empty( $key ) ) {
 			return $key;
 		}
-		return $this->resolve_env( 'EXO_API_KEY' );
+		return $this->resolve_env( 'AIPRFOEX_API_KEY' );
 	}
 
 	public function get_model_name(): string {
 		return $this->resolve(
 			ConnectorSettings::OPTION_MODEL_NAME,
-			'EXO_MODEL',
+			'AIPRFOEX_MODEL',
 			''
 		);
 	}

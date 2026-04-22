@@ -5,7 +5,7 @@
  * Description: Connect WordPress to exo — run frontier AI models locally on your device cluster.
  * Requires at least: 7.0
  * Requires PHP: 8.3
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Per Søderlind
  * Author URI: https://soderlind.no/
  * License: GPL-2.0-or-later
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	return;
 }
 
-define( 'AIPRFOEX_PROVIDER_VERSION', '1.0.0' );
+define( 'AIPRFOEX_PROVIDER_VERSION', '1.0.1' );
 define( 'AIPRFOEX_PROVIDER_FILE', __FILE__ );
 define( 'AIPRFOEX_AI_PLUGIN_SENTINEL_ID', 'aiprfoex_status' );
 define( 'AIPRFOEX_AI_PLUGIN_SENTINEL_OPTION', 'connectors_ai_aiprfoex_status_api_key' );

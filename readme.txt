@@ -4,7 +4,7 @@ Tags: ai, exo, local-ai, llm, connector
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,9 @@ The plugin can be configured via the Connectors page or environment variables:
 You can also define these as constants in `wp-config.php`.
 
 == Changelog ==
+
+= 1.0.1 =
+* Added GitHub Actions workflow for deployment to WordPress.org.
 
 = 1.0.0 =
 * Prefix all declarations, globals, and stored data for WordPress.org compliance.

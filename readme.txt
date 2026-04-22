@@ -64,6 +64,11 @@ The plugin can be configured via the Connectors page or environment variables:
 
 You can also define these as constants in `wp-config.php`.
 
+== Screenshots ==
+
+1. exo connector in the WordPress admin Connectors page, showing detected deployments and capabilities.
+
+
 == Changelog ==
 
 = 1.0.1 =

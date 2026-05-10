@@ -4,7 +4,7 @@ Tags: ai, exo, local-ai, llm, connector
 Requires at least: 7.0
 Tested up to: 7.0
 Requires PHP: 8.3
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ You can also define these as constants in `wp-config.php`.
 
 
 == Changelog ==
+
+= 1.0.2 =
+* Fix AI plugin connector detection on WordPress 7.0 RC3 by pointing the hidden sentinel connector at its synced setting.
 
 = 1.0.1 =
 * Added GitHub Actions workflow for deployment to WordPress.org.

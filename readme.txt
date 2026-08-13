@@ -2,9 +2,9 @@
 Contributors: PerS
 Tags: ai, exo, local-ai, llm, connector
 Requires at least: 7.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 8.3
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ You can also define these as constants in `wp-config.php`.
 
 
 == Changelog ==
+
+= 1.0.4 =
+* Confirm compatibility with WordPress 7.1 and update "Tested up to".
 
 = 1.0.3 =
 * Update npm development dependencies and resolve npm audit findings.
